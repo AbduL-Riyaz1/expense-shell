@@ -32,28 +32,28 @@ echo "Script is executeing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf install nginx -y &>>$LOG_FILE_NAM
+dnf install nginx -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Nginx Server"
 
-systemctl enable nginx &>>$LOG_FILE_NAM
+systemctl enable nginx &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling Nginx Server"
 
-systemctl start nginx &>>$LOG_FILE_NAM
+systemctl start nginx &>>$LOG_FILE_NAME
 VALIDATE $? "Starting Nginx Server"
 
-rm -rf /usr/share/nginx/html/* &>>$LOG_FILE_NAM
+rm -rf /usr/share/nginx/html/* &>>$LOG_FILE_NAME
 VALIDATE $? "Removing existing Version of code"
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE_NAM
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Downloding Latest Code"
 
-cd /usr/share/nginx/html &>>$LOG_FILE_NAM
+cd /usr/share/nginx/html &>>$LOG_FILE_NAME
 VALIDATE $? "Moving to HTML directory"
 
-unzip /tmp/frontend.zip &>>$LOG_FILE_NAM
+unzip /tmp/frontend.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Unzping the frontend code"
 
-cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE_NAM
+cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE_NAME
 
-systemctl restart nginx &>>$LOG_FILE_NAM
+systemctl restart nginx &>>$LOG_FILE_NAME
 VALIDATE $? "Restarting Nginx Server"
