@@ -32,28 +32,28 @@ echo "Script is executeing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf install nginx -y 
+dnf install nginx -y &>>$LOG_FILE_NAM
 VALIDATE $? "Installing Nginx Server"
 
-systemctl enable nginx
+systemctl enable nginx &>>$LOG_FILE_NAM
 VALIDATE $? "Enabling Nginx Server"
 
-systemctl start nginx
+systemctl start nginx &>>$LOG_FILE_NAM
 VALIDATE $? "Starting Nginx Server"
 
-rm -rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/* &>>$LOG_FILE_NAM
 VALIDATE $? "Removing existing Version of code"
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE_NAM
 VALIDATE $? "Downloding Latest Code"
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html &>>$LOG_FILE_NAM
 VALIDATE $? "Moving to HTML directory"
 
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip &>>$LOG_FILE_NAM
 VALIDATE $? "Unzping the frontend code"
 
-cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf
+cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE_NAM
 
-systemctl restart nginx
+systemctl restart nginx &>>$LOG_FILE_NAM
 VALIDATE $? "Restarting Nginx Server"
